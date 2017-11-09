@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         return
       }
 
-      print(result.data!.allEvents.map { $0.name })
+      print(result.data!.allEvents.map { "name: \($0.name), date: \($0.date)"  })
     }
   }
 

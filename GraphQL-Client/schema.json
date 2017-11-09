@@ -108,7 +108,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "String",
+                  "name": "dateISO",
                   "ofType": null
                 }
               }
@@ -1078,6 +1078,16 @@
           "interfaces": null,
           "kind": "ENUM",
           "name": "__TypeKind",
+          "possibleTypes": null
+        },
+        {
+          "description": null,
+          "enumValues": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "kind": "SCALAR",
+          "name": "dateISO",
           "possibleTypes": null
         }
       ]

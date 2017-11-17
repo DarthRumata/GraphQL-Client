@@ -9,13 +9,24 @@
 /* Begin PBXBuildFile section */
 		0577102FBD7E98B98740D798 /* Pods_GraphQL_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1DCC3581DBD956269F467B /* Pods_GraphQL_Client.framework */; };
 		92A7874A1FB1BFF600ABC71D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A787491FB1BFF600ABC71D /* AppDelegate.swift */; };
-		92A7874C1FB1BFF600ABC71D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7874B1FB1BFF600ABC71D /* ViewController.swift */; };
 		92A7874F1FB1BFF600ABC71D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A7874D1FB1BFF600ABC71D /* Main.storyboard */; };
 		92A787511FB1BFF600ABC71D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92A787501FB1BFF600ABC71D /* Assets.xcassets */; };
 		92A787541FB1BFF600ABC71D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A787521FB1BFF600ABC71D /* LaunchScreen.storyboard */; };
 		92A788301FB3DEE300ABC71D /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 92A7882F1FB3DEE300ABC71D /* schema.json */; };
 		92A788321FB3DF1C00ABC71D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A788311FB3DF1C00ABC71D /* API.swift */; };
 		92A788341FB3E3CC00ABC71D /* queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 92A788331FB3E3CC00ABC71D /* queries.graphql */; };
+		92D18FA01FB9A83900A7F82B /* DateBadge.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D18F9F1FB9A83900A7F82B /* DateBadge.xib */; };
+		92D18FA21FB9A84500A7F82B /* DateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D18FA11FB9A84500A7F82B /* DateBadge.swift */; };
+		92D1947A1FBB079100A7F82B /* API+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D194791FBB079100A7F82B /* API+Extensions.swift */; };
+		92D1947E1FBB59D500A7F82B /* UITextViewPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1947D1FBB59D500A7F82B /* UITextViewPlaceholder.swift */; };
+		92DA2D881FBDB50100EB6606 /* HistoricalEventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA2D871FBDB50100EB6606 /* HistoricalEventInput.swift */; };
+		92DA2D8A1FBDCF1E00EB6606 /* MessageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA2D891FBDCF1E00EB6606 /* MessageViewBuilder.swift */; };
+		92DA2D8C1FBF381D00EB6606 /* Editable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA2D8B1FBF381D00EB6606 /* Editable.swift */; };
+		92DA2D8E1FBF38D400EB6606 /* TappableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DA2D8D1FBF38D400EB6606 /* TappableImageView.swift */; };
+		92E832511FB73B3C003DB68E /* BriefEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E8324E1FB73B3C003DB68E /* BriefEventCell.swift */; };
+		92E832521FB73B3C003DB68E /* BriefEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E8324F1FB73B3C003DB68E /* BriefEventCell.xib */; };
+		92E832531FB73B3C003DB68E /* EventListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E832501FB73B3C003DB68E /* EventListController.swift */; };
+		92E832551FB73B4C003DB68E /* HistoricalEventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E832541FB73B4C003DB68E /* HistoricalEventDetailsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +34,6 @@
 		57E65C7A6189FD30E039B656 /* Pods-GraphQL-Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphQL-Client.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GraphQL-Client/Pods-GraphQL-Client.debug.xcconfig"; sourceTree = "<group>"; };
 		92A787461FB1BFF600ABC71D /* GraphQL-Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GraphQL-Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92A787491FB1BFF600ABC71D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		92A7874B1FB1BFF600ABC71D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		92A7874E1FB1BFF600ABC71D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92A787501FB1BFF600ABC71D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92A787531FB1BFF600ABC71D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -31,6 +41,18 @@
 		92A7882F1FB3DEE300ABC71D /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		92A788311FB3DF1C00ABC71D /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		92A788331FB3E3CC00ABC71D /* queries.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = queries.graphql; sourceTree = "<group>"; };
+		92D18F9F1FB9A83900A7F82B /* DateBadge.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateBadge.xib; sourceTree = "<group>"; };
+		92D18FA11FB9A84500A7F82B /* DateBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateBadge.swift; sourceTree = "<group>"; };
+		92D194791FBB079100A7F82B /* API+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "API+Extensions.swift"; sourceTree = "<group>"; };
+		92D1947D1FBB59D500A7F82B /* UITextViewPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewPlaceholder.swift; sourceTree = "<group>"; };
+		92DA2D871FBDB50100EB6606 /* HistoricalEventInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalEventInput.swift; sourceTree = "<group>"; };
+		92DA2D891FBDCF1E00EB6606 /* MessageViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewBuilder.swift; sourceTree = "<group>"; };
+		92DA2D8B1FBF381D00EB6606 /* Editable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editable.swift; sourceTree = "<group>"; };
+		92DA2D8D1FBF38D400EB6606 /* TappableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TappableImageView.swift; sourceTree = "<group>"; };
+		92E8324E1FB73B3C003DB68E /* BriefEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BriefEventCell.swift; sourceTree = "<group>"; };
+		92E8324F1FB73B3C003DB68E /* BriefEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BriefEventCell.xib; sourceTree = "<group>"; };
+		92E832501FB73B3C003DB68E /* EventListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListController.swift; sourceTree = "<group>"; };
+		92E832541FB73B4C003DB68E /* HistoricalEventDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalEventDetailsController.swift; sourceTree = "<group>"; };
 		BB3B0655B1A1E03BFDE1428C /* Pods-GraphQL-Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraphQL-Client.release.xcconfig"; path = "Pods/Target Support Files/Pods-GraphQL-Client/Pods-GraphQL-Client.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,17 +106,68 @@
 		92A787481FB1BFF600ABC71D /* GraphQL-Client */ = {
 			isa = PBXGroup;
 			children = (
+				92D18F9E1FB9A7FA00A7F82B /* Common */,
+				92E8324B1FB73B3C003DB68E /* Flows */,
 				92A788311FB3DF1C00ABC71D /* API.swift */,
 				92A7882F1FB3DEE300ABC71D /* schema.json */,
 				92A788331FB3E3CC00ABC71D /* queries.graphql */,
+				92D1947D1FBB59D500A7F82B /* UITextViewPlaceholder.swift */,
 				92A787491FB1BFF600ABC71D /* AppDelegate.swift */,
-				92A7874B1FB1BFF600ABC71D /* ViewController.swift */,
+				92D194791FBB079100A7F82B /* API+Extensions.swift */,
 				92A7874D1FB1BFF600ABC71D /* Main.storyboard */,
 				92A787501FB1BFF600ABC71D /* Assets.xcassets */,
 				92A787521FB1BFF600ABC71D /* LaunchScreen.storyboard */,
 				92A787551FB1BFF600ABC71D /* Info.plist */,
 			);
 			path = "GraphQL-Client";
+			sourceTree = "<group>";
+		};
+		92D18F9E1FB9A7FA00A7F82B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				92D18F9F1FB9A83900A7F82B /* DateBadge.xib */,
+				92D18FA11FB9A84500A7F82B /* DateBadge.swift */,
+				92DA2D891FBDCF1E00EB6606 /* MessageViewBuilder.swift */,
+				92DA2D8D1FBF38D400EB6606 /* TappableImageView.swift */,
+				92DA2D8B1FBF381D00EB6606 /* Editable.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		92DA2D861FBDB4F500EB6606 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				92DA2D871FBDB50100EB6606 /* HistoricalEventInput.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		92E8324B1FB73B3C003DB68E /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				92E8324C1FB73B3C003DB68E /* EditEvent */,
+				92E8324D1FB73B3C003DB68E /* EventList */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		92E8324C1FB73B3C003DB68E /* EditEvent */ = {
+			isa = PBXGroup;
+			children = (
+				92DA2D861FBDB4F500EB6606 /* Logic */,
+				92E832541FB73B4C003DB68E /* HistoricalEventDetailsController.swift */,
+			);
+			path = EditEvent;
+			sourceTree = "<group>";
+		};
+		92E8324D1FB73B3C003DB68E /* EventList */ = {
+			isa = PBXGroup;
+			children = (
+				92E8324E1FB73B3C003DB68E /* BriefEventCell.swift */,
+				92E8324F1FB73B3C003DB68E /* BriefEventCell.xib */,
+				92E832501FB73B3C003DB68E /* EventListController.swift */,
+			);
+			path = EventList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,8 +178,8 @@
 			buildConfigurationList = 92A787581FB1BFF600ABC71D /* Build configuration list for PBXNativeTarget "GraphQL-Client" */;
 			buildPhases = (
 				871C6515196159F4662484EC /* [CP] Check Pods Manifest.lock */,
-				92A787421FB1BFF600ABC71D /* Sources */,
 				92A787E21FB3627B00ABC71D /* Generate Apollo GraphQL API */,
+				92A787421FB1BFF600ABC71D /* Sources */,
 				92A787431FB1BFF600ABC71D /* Frameworks */,
 				92A787441FB1BFF600ABC71D /* Resources */,
 				B27114ECAA3DD995993E7E67 /* [CP] Embed Pods Frameworks */,
@@ -164,8 +237,10 @@
 				92A788341FB3E3CC00ABC71D /* queries.graphql in Resources */,
 				92A788301FB3DEE300ABC71D /* schema.json in Resources */,
 				92A787541FB1BFF600ABC71D /* LaunchScreen.storyboard in Resources */,
+				92D18FA01FB9A83900A7F82B /* DateBadge.xib in Resources */,
 				92A787511FB1BFF600ABC71D /* Assets.xcassets in Resources */,
 				92A7874F1FB1BFF600ABC71D /* Main.storyboard in Resources */,
+				92E832521FB73B3C003DB68E /* BriefEventCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,13 +253,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GraphQL-Client-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		92A787E21FB3627B00ABC71D /* Generate Apollo GraphQL API */ = {
@@ -207,9 +285,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GraphQL-Client/Pods-GraphQL-Client-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionKit/ActionKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
+				"${BUILT_PRODUCTS_DIR}/CHTCollectionViewWaterfallLayout/CHTCollectionViewWaterfallLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyPickerPopover/SwiftyPickerPopover.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHTCollectionViewWaterfallLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyPickerPopover.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -238,9 +327,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92A7874C1FB1BFF600ABC71D /* ViewController.swift in Sources */,
+				92E832551FB73B4C003DB68E /* HistoricalEventDetailsController.swift in Sources */,
 				92A788321FB3DF1C00ABC71D /* API.swift in Sources */,
 				92A7874A1FB1BFF600ABC71D /* AppDelegate.swift in Sources */,
+				92E832531FB73B3C003DB68E /* EventListController.swift in Sources */,
+				92D1947A1FBB079100A7F82B /* API+Extensions.swift in Sources */,
+				92DA2D881FBDB50100EB6606 /* HistoricalEventInput.swift in Sources */,
+				92E832511FB73B3C003DB68E /* BriefEventCell.swift in Sources */,
+				92D18FA21FB9A84500A7F82B /* DateBadge.swift in Sources */,
+				92D1947E1FBB59D500A7F82B /* UITextViewPlaceholder.swift in Sources */,
+				92DA2D8E1FBF38D400EB6606 /* TappableImageView.swift in Sources */,
+				92DA2D8C1FBF381D00EB6606 /* Editable.swift in Sources */,
+				92DA2D8A1FBDCF1E00EB6606 /* MessageViewBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

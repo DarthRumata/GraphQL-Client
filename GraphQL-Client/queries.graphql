@@ -1,7 +1,38 @@
 query GetAllEvents {
   allEvents {
-    name
-    date
-    type
+    ...BriefHistoricalEvent
   }
 }
+
+query GetHistoricalEvent($id: String!) {
+  historicalEvent(id: $id) {
+    ...FullHistoricalEvent
+  }
+}
+
+mutation CreateHistoricalEvent($event: HistoricalEventInput!) {
+  createEvent(input: $event) {
+    ...FullHistoricalEvent
+  }
+}
+
+fragment BriefHistoricalEvent on HistoricalEvent {
+  id
+  name
+  date
+  type
+}
+
+fragment HistoricalEventContent on HistoricalEvent {
+  name
+  date
+  type
+  description
+}
+
+fragment FullHistoricalEvent on HistoricalEvent {
+  id
+  ...HistoricalEventContent
+}
+
+

@@ -1,14 +1,26 @@
 PODS:
+  - ActionKit (2.3.0)
   - Apollo (0.7.0):
     - Apollo/Core (= 0.7.0)
   - Apollo/Core (0.7.0)
+  - CHTCollectionViewWaterfallLayout/Swift (0.9.7)
+  - SwiftMessages (3.5.1)
+  - SwiftyPickerPopover (5.3.0)
 
 DEPENDENCIES:
+  - ActionKit (~> 2.3.0)
   - Apollo
+  - CHTCollectionViewWaterfallLayout/Swift (~> 0.9)
+  - SwiftMessages (= 3.5.1)
+  - SwiftyPickerPopover (= 5.3.0)
 
 SPEC CHECKSUMS:
+  ActionKit: b2851fcee61a279e43fc92608baf547c12c9239e
   Apollo: d6649ac06168660e70c6226c4eadfc0770791ba5
+  CHTCollectionViewWaterfallLayout: 9d11068fafecac106695bb5a5d6d0f738483b598
+  SwiftMessages: ea0184c801030e52674c603896812c392c129248
+  SwiftyPickerPopover: c5d2d3dfeab310612e8ce63356c33149f8fc9a8e
 
-PODFILE CHECKSUM: 1b800b3d9b840f117e235adfd43d57c251139d0c
+PODFILE CHECKSUM: 2cdb2a578e3519632404d480beb8f7a148b940dd
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

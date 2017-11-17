@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="17B48" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BriefEventCell" id="eLV-Eb-psv" customClass="BriefEventCell" customModule="GraphQL_Client" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="231" height="240"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="231" height="240"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kJk-x7-nRu">
+                        <rect key="frame" x="0.0" y="10" width="231" height="115.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="kJk-x7-nRu" secondAttribute="height" multiplier="2: 1" id="U2b-5D-1sh"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xbj-AW-hau" userLabel="Date Badge" customClass="DateBadge" customModule="GraphQL_Client" customModuleProvider="target">
+                        <rect key="frame" x="10" y="130.5" width="211" height="30"/>
+                        <color key="backgroundColor" red="1" green="0.20094866071428572" blue="0.29807477678571431" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="DXH-cQ-apt"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcV-Pt-7gl">
+                        <rect key="frame" x="15" y="170.5" width="201" height="54.5"/>
+                        <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="kJk-x7-nRu" secondAttribute="trailing" id="4S1-NC-DJh"/>
+                <constraint firstAttribute="trailing" secondItem="pcV-Pt-7gl" secondAttribute="trailing" constant="15" id="9qj-qc-OGO"/>
+                <constraint firstItem="Xbj-AW-hau" firstAttribute="bottom" secondItem="kJk-x7-nRu" secondAttribute="bottom" constant="35" id="ASQ-7e-Br6"/>
+                <constraint firstAttribute="trailing" secondItem="Xbj-AW-hau" secondAttribute="trailing" constant="10" id="DpA-v8-03Z"/>
+                <constraint firstAttribute="bottom" secondItem="pcV-Pt-7gl" secondAttribute="bottom" constant="15" id="G9v-3M-NrH"/>
+                <constraint firstItem="pcV-Pt-7gl" firstAttribute="leading" secondItem="eLV-Eb-psv" secondAttribute="leading" constant="15" id="IDb-P9-NWz"/>
+                <constraint firstItem="kJk-x7-nRu" firstAttribute="leading" secondItem="eLV-Eb-psv" secondAttribute="leading" id="ewW-yH-zdM"/>
+                <constraint firstItem="pcV-Pt-7gl" firstAttribute="top" secondItem="Xbj-AW-hau" secondAttribute="bottom" constant="10" id="hjs-py-Fq5"/>
+                <constraint firstItem="kJk-x7-nRu" firstAttribute="top" secondItem="eLV-Eb-psv" secondAttribute="top" constant="10" id="j29-gp-Bhy"/>
+                <constraint firstItem="Xbj-AW-hau" firstAttribute="leading" secondItem="eLV-Eb-psv" secondAttribute="leading" constant="10" id="pEj-wT-kfC"/>
+            </constraints>
+            <size key="customSize" width="231" height="240"/>
+            <connections>
+                <outlet property="dateContainer" destination="Xbj-AW-hau" id="Cgg-ca-g3e"/>
+                <outlet property="icon" destination="kJk-x7-nRu" id="ga9-BV-dGT"/>
+                <outlet property="nameLabel" destination="pcV-Pt-7gl" id="u6i-wV-tba"/>
+            </connections>
+            <point key="canvasLocation" x="-135.5" y="195"/>
+        </collectionViewCell>
+    </objects>
+</document>

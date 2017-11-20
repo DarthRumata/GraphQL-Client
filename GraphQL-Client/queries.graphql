@@ -16,6 +16,18 @@ mutation CreateHistoricalEvent($event: HistoricalEventInput!) {
   }
 }
 
+mutation UpdateHistoricalEvent($event: HistoricalEventInput!) {
+  updateEvent(input: $event) {
+    ...FullHistoricalEvent
+  }
+}
+
+mutation DeleteHistoricalEvent($id: String!) {
+  deleteEvent(id: $id) {
+    id
+  }
+}
+
 fragment BriefHistoricalEvent on HistoricalEvent {
   id
   name

@@ -527,6 +527,239 @@ public final class CreateHistoricalEventMutation: GraphQLMutation {
   }
 }
 
+public final class UpdateHistoricalEventMutation: GraphQLMutation {
+  public static let operationString =
+    "mutation UpdateHistoricalEvent($event: HistoricalEventInput!) {\n  updateEvent(input: $event) {\n    __typename\n    ...FullHistoricalEvent\n  }\n}"
+
+  public static var requestString: String { return operationString.appending(FullHistoricalEvent.fragmentString).appending(HistoricalEventContent.fragmentString) }
+
+  public var event: HistoricalEventInput
+
+  public init(event: HistoricalEventInput) {
+    self.event = event
+  }
+
+  public var variables: GraphQLMap? {
+    return ["event": event]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("updateEvent", arguments: ["input": GraphQLVariable("event")], type: .nonNull(.object(UpdateEvent.selections))),
+    ]
+
+    public var snapshot: Snapshot
+
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    public init(updateEvent: UpdateEvent) {
+      self.init(snapshot: ["__typename": "Mutation", "updateEvent": updateEvent.snapshot])
+    }
+
+    public var updateEvent: UpdateEvent {
+      get {
+        return UpdateEvent(snapshot: snapshot["updateEvent"]! as! Snapshot)
+      }
+      set {
+        snapshot.updateValue(newValue.snapshot, forKey: "updateEvent")
+      }
+    }
+
+    public struct UpdateEvent: GraphQLSelectionSet {
+      public static let possibleTypes = ["HistoricalEvent"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(String.self))),
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("date", type: .nonNull(.scalar(String.self))),
+        GraphQLField("type", type: .nonNull(.scalar(HistoricalEventType.self))),
+        GraphQLField("description", type: .scalar(String.self)),
+      ]
+
+      public var snapshot: Snapshot
+
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      public init(id: String, name: String, date: String, type: HistoricalEventType, description: String? = nil) {
+        self.init(snapshot: ["__typename": "HistoricalEvent", "id": id, "name": name, "date": date, "type": type, "description": description])
+      }
+
+      public var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: String {
+        get {
+          return snapshot["id"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var name: String {
+        get {
+          return snapshot["name"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var date: String {
+        get {
+          return snapshot["date"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "date")
+        }
+      }
+
+      public var type: HistoricalEventType {
+        get {
+          return snapshot["type"]! as! HistoricalEventType
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "type")
+        }
+      }
+
+      public var description: String? {
+        get {
+          return snapshot["description"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "description")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(snapshot: snapshot)
+        }
+        set {
+          snapshot += newValue.snapshot
+        }
+      }
+
+      public struct Fragments {
+        public var snapshot: Snapshot
+
+        public var fullHistoricalEvent: FullHistoricalEvent {
+          get {
+            return FullHistoricalEvent(snapshot: snapshot)
+          }
+          set {
+            snapshot += newValue.snapshot
+          }
+        }
+
+        public var historicalEventContent: HistoricalEventContent {
+          get {
+            return HistoricalEventContent(snapshot: snapshot)
+          }
+          set {
+            snapshot += newValue.snapshot
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class DeleteHistoricalEventMutation: GraphQLMutation {
+  public static let operationString =
+    "mutation DeleteHistoricalEvent($id: String!) {\n  deleteEvent(id: $id) {\n    __typename\n    id\n  }\n}"
+
+  public var id: String
+
+  public init(id: String) {
+    self.id = id
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("deleteEvent", arguments: ["id": GraphQLVariable("id")], type: .nonNull(.object(DeleteEvent.selections))),
+    ]
+
+    public var snapshot: Snapshot
+
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    public init(deleteEvent: DeleteEvent) {
+      self.init(snapshot: ["__typename": "Mutation", "deleteEvent": deleteEvent.snapshot])
+    }
+
+    public var deleteEvent: DeleteEvent {
+      get {
+        return DeleteEvent(snapshot: snapshot["deleteEvent"]! as! Snapshot)
+      }
+      set {
+        snapshot.updateValue(newValue.snapshot, forKey: "deleteEvent")
+      }
+    }
+
+    public struct DeleteEvent: GraphQLSelectionSet {
+      public static let possibleTypes = ["HistoricalEvent"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public var snapshot: Snapshot
+
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      public init(id: String) {
+        self.init(snapshot: ["__typename": "HistoricalEvent", "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: String {
+        get {
+          return snapshot["id"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
 public struct BriefHistoricalEvent: GraphQLFragment {
   public static let fragmentString =
     "fragment BriefHistoricalEvent on HistoricalEvent {\n  __typename\n  id\n  name\n  date\n  type\n}"

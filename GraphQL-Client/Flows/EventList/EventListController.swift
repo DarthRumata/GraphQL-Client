@@ -20,12 +20,12 @@ class EventListController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     configureCollection()
-    updateEventList()
   }
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    updateEventList()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

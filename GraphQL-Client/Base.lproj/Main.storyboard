@@ -110,7 +110,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKr-Zz-hmK">
-                                <rect key="frame" x="25" y="328" width="325" height="324"/>
+                                <rect key="frame" x="25" y="328" width="325" height="304"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -129,25 +129,49 @@
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puT-Y2-tQY" customClass="SimpleButton" customModule="SimpleButton">
+                                <rect key="frame" x="15" y="632" width="345" height="45"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="9xL-oa-BSe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapDeleteEvent" destination="ol1-Jk-Tue" eventType="touchUpInside" id="DPQ-1q-29L"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="puT-Y2-tQY" secondAttribute="trailing" constant="15" id="4fq-iy-bCT"/>
                             <constraint firstItem="Zpz-Aq-D2k" firstAttribute="top" secondItem="6Cl-KU-Ncb" secondAttribute="top" id="6xi-Ns-IpA"/>
                             <constraint firstItem="DKr-Zz-hmK" firstAttribute="leading" secondItem="6Cl-KU-Ncb" secondAttribute="leading" constant="25" id="770-ju-yFk"/>
+                            <constraint firstItem="puT-Y2-tQY" firstAttribute="leading" secondItem="6Cl-KU-Ncb" secondAttribute="leading" constant="15" id="7rr-q8-T2K"/>
                             <constraint firstItem="tmk-wS-tmi" firstAttribute="top" secondItem="Hsw-5o-MQR" secondAttribute="bottom" constant="20" id="86b-Yj-x6C"/>
                             <constraint firstAttribute="trailing" secondItem="Zpz-Aq-D2k" secondAttribute="trailing" id="B1C-Kl-LRY"/>
                             <constraint firstItem="Hsw-5o-MQR" firstAttribute="leading" secondItem="huO-3K-cH6" secondAttribute="trailing" constant="15" id="BBF-kl-h7M"/>
                             <constraint firstItem="huO-3K-cH6" firstAttribute="leading" secondItem="AS3-lk-YmZ" secondAttribute="leading" id="F7D-vt-xnS"/>
                             <constraint firstItem="Hsw-5o-MQR" firstAttribute="trailing" secondItem="AS3-lk-YmZ" secondAttribute="trailing" id="HOt-ry-vVQ"/>
+                            <constraint firstItem="puT-Y2-tQY" firstAttribute="top" secondItem="DKr-Zz-hmK" secondAttribute="bottom" id="Lgi-A0-Ucp"/>
                             <constraint firstItem="DKr-Zz-hmK" firstAttribute="top" secondItem="tmk-wS-tmi" secondAttribute="bottom" constant="10" id="Lp3-pT-DGk"/>
                             <constraint firstAttribute="trailing" secondItem="DKr-Zz-hmK" secondAttribute="trailing" constant="25" id="NBN-Bn-our"/>
                             <constraint firstItem="guv-V6-tmR" firstAttribute="top" secondItem="Zpz-Aq-D2k" secondAttribute="bottom" id="RJm-X4-vOY"/>
-                            <constraint firstItem="guv-V6-tmR" firstAttribute="top" secondItem="DKr-Zz-hmK" secondAttribute="bottom" constant="15" id="ReO-Wg-Hio"/>
                             <constraint firstItem="AS3-lk-YmZ" firstAttribute="top" secondItem="Jjz-Ya-JLp" secondAttribute="bottom" id="SAQ-Zb-P74"/>
                             <constraint firstItem="AS3-lk-YmZ" firstAttribute="leading" secondItem="6Cl-KU-Ncb" secondAttribute="leadingMargin" id="TRh-Dj-tye"/>
                             <constraint firstItem="Zpz-Aq-D2k" firstAttribute="leading" secondItem="6Cl-KU-Ncb" secondAttribute="leading" id="VKE-pS-qt4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tmk-wS-tmi" secondAttribute="trailing" id="Xrm-nL-nLx"/>
                             <constraint firstItem="huO-3K-cH6" firstAttribute="bottom" secondItem="Hsw-5o-MQR" secondAttribute="bottom" id="k8v-5n-11f"/>
+                            <constraint firstItem="guv-V6-tmR" firstAttribute="top" secondItem="puT-Y2-tQY" secondAttribute="bottom" constant="-10" id="rrv-hX-76a"/>
                             <constraint firstItem="tmk-wS-tmi" firstAttribute="leading" secondItem="6Cl-KU-Ncb" secondAttribute="leadingMargin" id="wS5-em-3RQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AS3-lk-YmZ" secondAttribute="trailing" id="yG9-Yv-Gmk"/>
                             <constraint firstItem="Hsw-5o-MQR" firstAttribute="bottom" secondItem="AS3-lk-YmZ" secondAttribute="bottom" constant="15" id="zOu-At-esL"/>
@@ -157,6 +181,7 @@
                     <navigationItem key="navigationItem" title="Details" id="VxB-h3-aOM"/>
                     <connections>
                         <outlet property="dateBadge" destination="Hsw-5o-MQR" id="s3M-Xd-8Tn"/>
+                        <outlet property="deleteButton" destination="puT-Y2-tQY" id="Mm6-R6-UVL"/>
                         <outlet property="descriptionLabel" destination="DKr-Zz-hmK" id="9cb-pz-cd4"/>
                         <outlet property="picture" destination="AS3-lk-YmZ" id="R75-u3-ksn"/>
                         <outlet property="titleLabel" destination="tmk-wS-tmi" id="wPR-kg-Sqy"/>

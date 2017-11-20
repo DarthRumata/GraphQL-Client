@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import SwiftMessages
 import SwiftyPickerPopover
+import Apollo
+import SimpleButton
 
 private enum Mode {
   case edit, view
@@ -37,7 +39,6 @@ class HistoricalEventDetailsController: UIViewController {
       if let newValue = newValue {
         mode = .view
         draftEvent.prefill(with: newValue)
-        eventId = newValue.id
       }
     }
   }
@@ -47,7 +48,6 @@ class HistoricalEventDetailsController: UIViewController {
 
     return draft
   }()
-  var eventId: String?
 
   @IBOutlet fileprivate weak var picture: TappableImageView!
   @IBOutlet fileprivate weak var typeIcon: TappableImageView!
@@ -62,6 +62,8 @@ class HistoricalEventDetailsController: UIViewController {
       descriptionLabel.placeholder = "Add description"
     }
   }
+  @IBOutlet weak var deleteButton: SimpleButton!
+
   fileprivate var actionButton: UIButton!
 
   fileprivate var mode: Mode = .edit
@@ -76,7 +78,7 @@ class HistoricalEventDetailsController: UIViewController {
     updateControllerMode()
     typeIcon.image = draftEvent.type.iconImage
 
-    guard let eventId = eventId else {
+    guard let id = draftEvent.id, let eventId = id else {
       return
     }
     dateBadge.date = draftEvent.date
@@ -119,6 +121,11 @@ class HistoricalEventDetailsController: UIViewController {
       actions.forEach { sheet.addAction($0) }
       self.present(sheet, animated: true, completion: nil)
     }
+    deleteButton.setBackgroundColor(UIColor.lightGray, for: .disabled, animated: true, animationDuration: 0.2)
+  }
+
+  @IBAction func didTapDeleteEvent() {
+    deleteEvent()
   }
 
 }
@@ -133,11 +140,11 @@ private extension HistoricalEventDetailsController {
       choices: [["1989", "1544", "456", "23"], months, days, ["AD", "BC"]],
       selectedRows: [0, 0, 0, 0],
       columnPercents: [0.3, 0.25, 0.25, 0.2]
-    ).setDoneButton { (_, selectedRows, selectedStrings) in
-      let date = "\(selectedStrings[0])-\(selectedStrings[1])-\(selectedStrings[2]) \(selectedStrings[3])"
-      self.dateBadge.date = date
-      self.draftEvent.date = date
-    }.setFontSize(14).appear(originView: dateBadge, baseViewController: self)
+      ).setDoneButton { (_, selectedRows, selectedStrings) in
+        let date = "\(selectedStrings[0])-\(selectedStrings[1])-\(selectedStrings[2]) \(selectedStrings[3])"
+        self.dateBadge.date = date
+        self.draftEvent.date = date
+      }.setFontSize(14).appear(originView: dateBadge, baseViewController: self)
   }
 
   func updateControllerMode() {
@@ -146,6 +153,7 @@ private extension HistoricalEventDetailsController {
       field.isEditable = mode == .edit
     }
     actionButton.setTitle(mode == .view ? "Edit" : "Save", for: .normal)
+    deleteButton.isEnabled = draftEvent.id != nil
     updatePicture()
   }
 
@@ -162,7 +170,7 @@ private extension HistoricalEventDetailsController {
         let errorView = MessageViewBuilder.makeError(with: error.localizedDescription)
         SwiftMessages.show(view: errorView)
       } else {
-        createEvent()
+        draftEvent.id == nil ? createEvent() : updateEvent()
       }
     }
   }
@@ -182,7 +190,9 @@ private extension HistoricalEventDetailsController {
   }
 
   func createEvent() {
+    actionButton.isEnabled = false
     apollo.perform(mutation: CreateHistoricalEventMutation(event: draftEvent), queue: .main) { (result, error) in
+      self.actionButton.isEnabled = true
       guard let result = result else {
         let errorView = MessageViewBuilder.makeError(with: error?.localizedDescription ?? "Internal server error")
         SwiftMessages.show(view: errorView)
@@ -195,15 +205,55 @@ private extension HistoricalEventDetailsController {
         return
       }
 
-      self.draftEvent = HistoricalEventInput(
-        date: data.createEvent.date,
-        description: data.createEvent.description,
-        name: data.createEvent.name,
-        type: data.createEvent.type
-      )
-      self.mode = .view
-      self.updateControllerMode()
+      self.updateWithSnapshot(data.createEvent.snapshot)
     }
   }
 
+  func updateEvent() {
+    actionButton.isEnabled = false
+    apollo.perform(mutation: UpdateHistoricalEventMutation(event: draftEvent), queue: .main) { (result, error) in
+      self.actionButton.isEnabled = true
+      guard let result = result else {
+        let errorView = MessageViewBuilder.makeError(with: error?.localizedDescription ?? "Internal server error")
+        SwiftMessages.show(view: errorView)
+        return
+      }
+      guard let data = result.data else {
+        let errorMessage = result.errors?.first?.localizedDescription ?? "Internal server error"
+        let errorView = MessageViewBuilder.makeError(with: errorMessage)
+        SwiftMessages.show(view: errorView)
+        return
+      }
+
+      self.updateWithSnapshot(data.updateEvent.snapshot)
+    }
+  }
+
+  func updateWithSnapshot(_ snapshot: Snapshot) {
+    let fullEvent = FullHistoricalEvent(snapshot: snapshot)
+    self.draftEvent.update(with: fullEvent)
+    self.mode = .view
+    self.updateControllerMode()
+  }
+
+  func deleteEvent() {
+    deleteButton.isEnabled = false
+    apollo.perform(mutation: DeleteHistoricalEventMutation(id: draftEvent.id!!), queue: .main) { (result, error) in
+      self.deleteButton.isEnabled = true
+      guard let result = result else {
+        let errorView = MessageViewBuilder.makeError(with: error?.localizedDescription ?? "Internal server error")
+        SwiftMessages.show(view: errorView)
+        return
+      }
+      guard result.data != nil else {
+        let errorMessage = result.errors?.first?.localizedDescription ?? "Internal server error"
+        let errorView = MessageViewBuilder.makeError(with: errorMessage)
+        SwiftMessages.show(view: errorView)
+        return
+      }
+
+      self.navigationController!.popViewController(animated: true)
+    }
+  }
+  
 }

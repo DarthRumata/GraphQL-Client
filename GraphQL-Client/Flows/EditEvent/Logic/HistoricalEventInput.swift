@@ -10,14 +10,23 @@ import Foundation
 
 extension HistoricalEventInput {
 
+  init() {
+    graphQLMap = [:]
+  }
+
   mutating func prefill(with briefEvent: BriefHistoricalEvent) {
+    id = briefEvent.id
     name = briefEvent.name
     date = briefEvent.date
     type = briefEvent.type
   }
 
-  init() {
-    graphQLMap = [:]
+  mutating func update(with fullEvent: FullHistoricalEvent) {
+    id = fullEvent.id
+    name = fullEvent.name
+    date = fullEvent.date
+    description = fullEvent.description
+    type = fullEvent.type
   }
 
 }

@@ -11,5 +11,6 @@ target 'GraphQL-Client' do
   pod 'ActionKit', '~> 2.3.0'
   pod 'SwiftMessages', '3.5.1'
   pod 'SwiftyPickerPopover', '5.3.0'
+  pod 'SimpleButton', '3.0.1'
 
 end

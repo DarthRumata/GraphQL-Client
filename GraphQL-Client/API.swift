@@ -5,8 +5,8 @@ import Apollo
 public struct HistoricalEventInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(date: String, description: String, name: String, type: HistoricalEventType) {
-    graphQLMap = ["date": date, "description": description, "name": name, "type": type]
+  public init(date: String, description: Optional<String?> = nil, id: Optional<String?> = nil, name: String, type: HistoricalEventType) {
+    graphQLMap = ["date": date, "description": description, "id": id, "name": name, "type": type]
   }
 
   public var date: String {
@@ -18,12 +18,21 @@ public struct HistoricalEventInput: GraphQLMapConvertible {
     }
   }
 
-  public var description: String {
+  public var description: Optional<String?> {
     get {
-      return graphQLMap["description"] as! String
+      return graphQLMap["description"] as! Optional<String?>
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var id: Optional<String?> {
+    get {
+      return graphQLMap["id"] as! Optional<String?>
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
     }
   }
 
@@ -263,7 +272,7 @@ public final class GetHistoricalEventQuery: GraphQLQuery {
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
         GraphQLField("date", type: .nonNull(.scalar(String.self))),
         GraphQLField("type", type: .nonNull(.scalar(HistoricalEventType.self))),
-        GraphQLField("description", type: .nonNull(.scalar(String.self))),
+        GraphQLField("description", type: .scalar(String.self)),
       ]
 
       public var snapshot: Snapshot
@@ -272,7 +281,7 @@ public final class GetHistoricalEventQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: String, name: String, date: String, type: HistoricalEventType, description: String) {
+      public init(id: String, name: String, date: String, type: HistoricalEventType, description: String? = nil) {
         self.init(snapshot: ["__typename": "HistoricalEvent", "id": id, "name": name, "date": date, "type": type, "description": description])
       }
 
@@ -321,9 +330,9 @@ public final class GetHistoricalEventQuery: GraphQLQuery {
         }
       }
 
-      public var description: String {
+      public var description: String? {
         get {
-          return snapshot["description"]! as! String
+          return snapshot["description"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "description")
@@ -417,7 +426,7 @@ public final class CreateHistoricalEventMutation: GraphQLMutation {
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
         GraphQLField("date", type: .nonNull(.scalar(String.self))),
         GraphQLField("type", type: .nonNull(.scalar(HistoricalEventType.self))),
-        GraphQLField("description", type: .nonNull(.scalar(String.self))),
+        GraphQLField("description", type: .scalar(String.self)),
       ]
 
       public var snapshot: Snapshot
@@ -426,7 +435,7 @@ public final class CreateHistoricalEventMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: String, name: String, date: String, type: HistoricalEventType, description: String) {
+      public init(id: String, name: String, date: String, type: HistoricalEventType, description: String? = nil) {
         self.init(snapshot: ["__typename": "HistoricalEvent", "id": id, "name": name, "date": date, "type": type, "description": description])
       }
 
@@ -475,9 +484,9 @@ public final class CreateHistoricalEventMutation: GraphQLMutation {
         }
       }
 
-      public var description: String {
+      public var description: String? {
         get {
-          return snapshot["description"]! as! String
+          return snapshot["description"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "description")
@@ -599,7 +608,7 @@ public struct HistoricalEventContent: GraphQLFragment {
     GraphQLField("name", type: .nonNull(.scalar(String.self))),
     GraphQLField("date", type: .nonNull(.scalar(String.self))),
     GraphQLField("type", type: .nonNull(.scalar(HistoricalEventType.self))),
-    GraphQLField("description", type: .nonNull(.scalar(String.self))),
+    GraphQLField("description", type: .scalar(String.self)),
   ]
 
   public var snapshot: Snapshot
@@ -608,7 +617,7 @@ public struct HistoricalEventContent: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  public init(name: String, date: String, type: HistoricalEventType, description: String) {
+  public init(name: String, date: String, type: HistoricalEventType, description: String? = nil) {
     self.init(snapshot: ["__typename": "HistoricalEvent", "name": name, "date": date, "type": type, "description": description])
   }
 
@@ -648,9 +657,9 @@ public struct HistoricalEventContent: GraphQLFragment {
     }
   }
 
-  public var description: String {
+  public var description: String? {
     get {
-      return snapshot["description"]! as! String
+      return snapshot["description"] as? String
     }
     set {
       snapshot.updateValue(newValue, forKey: "description")
@@ -671,7 +680,7 @@ public struct FullHistoricalEvent: GraphQLFragment {
     GraphQLField("name", type: .nonNull(.scalar(String.self))),
     GraphQLField("date", type: .nonNull(.scalar(String.self))),
     GraphQLField("type", type: .nonNull(.scalar(HistoricalEventType.self))),
-    GraphQLField("description", type: .nonNull(.scalar(String.self))),
+    GraphQLField("description", type: .scalar(String.self)),
   ]
 
   public var snapshot: Snapshot
@@ -680,7 +689,7 @@ public struct FullHistoricalEvent: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  public init(id: String, name: String, date: String, type: HistoricalEventType, description: String) {
+  public init(id: String, name: String, date: String, type: HistoricalEventType, description: String? = nil) {
     self.init(snapshot: ["__typename": "HistoricalEvent", "id": id, "name": name, "date": date, "type": type, "description": description])
   }
 
@@ -729,9 +738,9 @@ public struct FullHistoricalEvent: GraphQLFragment {
     }
   }
 
-  public var description: String {
+  public var description: String? {
     get {
-      return snapshot["description"]! as! String
+      return snapshot["description"] as? String
     }
     set {
       snapshot.updateValue(newValue, forKey: "description")

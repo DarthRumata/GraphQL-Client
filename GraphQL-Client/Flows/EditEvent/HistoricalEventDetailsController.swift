@@ -90,7 +90,7 @@ class HistoricalEventDetailsController: UIViewController {
 
       let fullEvent = result.data!.historicalEvent
       self.draftEvent.description = fullEvent?.description ?? ""
-      self.descriptionLabel.observableText = self.draftEvent.description
+      self.descriptionLabel.observableText = self.draftEvent.description ?? ""
     }
   }
 
@@ -176,9 +176,6 @@ private extension HistoricalEventDetailsController {
     }
     guard draftEvent.graphQLMap["date"] != nil else {
       return ValidationError.date
-    }
-    guard let description = draftEvent.graphQLMap["description"] as? String, !description.isEmpty else {
-      return ValidationError.description
     }
 
     return nil

@@ -1,6 +1,10 @@
-query GetAllEvents {
-  allEvents {
-    ...BriefHistoricalEvent
+query GetEvents($cursor: String) {
+  allEvents(cursor: $cursor, limit: 10) {
+    cursor
+    items {
+      ...BriefHistoricalEvent
+    }
+    totalCount
   }
 }
 

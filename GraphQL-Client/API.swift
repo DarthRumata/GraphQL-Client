@@ -92,20 +92,27 @@ public enum HistoricalEventType: RawRepresentable, Equatable, Apollo.JSONDecodab
   }
 }
 
-public final class GetAllEventsQuery: GraphQLQuery {
+public final class GetEventsQuery: GraphQLQuery {
   public static let operationString =
-    "query GetAllEvents {\n  allEvents {\n    __typename\n    ...BriefHistoricalEvent\n  }\n}"
+    "query GetEvents($cursor: String) {\n  allEvents(cursor: $cursor, limit: 10) {\n    __typename\n    cursor\n    items {\n      __typename\n      ...BriefHistoricalEvent\n    }\n    totalCount\n  }\n}"
 
   public static var requestString: String { return operationString.appending(BriefHistoricalEvent.fragmentString) }
 
-  public init() {
+  public var cursor: String?
+
+  public init(cursor: String? = nil) {
+    self.cursor = cursor
+  }
+
+  public var variables: GraphQLMap? {
+    return ["cursor": cursor]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("allEvents", type: .nonNull(.list(.nonNull(.object(AllEvent.selections))))),
+      GraphQLField("allEvents", arguments: ["cursor": GraphQLVariable("cursor"), "limit": 10], type: .nonNull(.object(AllEvent.selections))),
     ]
 
     public var snapshot: Snapshot
@@ -114,29 +121,27 @@ public final class GetAllEventsQuery: GraphQLQuery {
       self.snapshot = snapshot
     }
 
-    public init(allEvents: [AllEvent]) {
-      self.init(snapshot: ["__typename": "Query", "allEvents": allEvents.map { $0.snapshot }])
+    public init(allEvents: AllEvent) {
+      self.init(snapshot: ["__typename": "Query", "allEvents": allEvents.snapshot])
     }
 
-    public var allEvents: [AllEvent] {
+    public var allEvents: AllEvent {
       get {
-        return (snapshot["allEvents"] as! [Snapshot]).map { AllEvent(snapshot: $0) }
+        return AllEvent(snapshot: snapshot["allEvents"]! as! Snapshot)
       }
       set {
-        snapshot.updateValue(newValue.map { $0.snapshot }, forKey: "allEvents")
+        snapshot.updateValue(newValue.snapshot, forKey: "allEvents")
       }
     }
 
     public struct AllEvent: GraphQLSelectionSet {
-      public static let possibleTypes = ["HistoricalEvent"]
+      public static let possibleTypes = ["Page"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("date", type: .nonNull(.scalar(String.self))),
-        GraphQLField("type", type: .nonNull(.scalar(HistoricalEventType.self))),
+        GraphQLField("cursor", type: .scalar(String.self)),
+        GraphQLField("items", type: .nonNull(.list(.nonNull(.object(Item.selections))))),
+        GraphQLField("totalCount", type: .nonNull(.scalar(Int.self))),
       ]
 
       public var snapshot: Snapshot
@@ -145,8 +150,8 @@ public final class GetAllEventsQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: String, name: String, date: String, type: HistoricalEventType) {
-        self.init(snapshot: ["__typename": "HistoricalEvent", "id": id, "name": name, "date": date, "type": type])
+      public init(cursor: String? = nil, items: [Item], totalCount: Int) {
+        self.init(snapshot: ["__typename": "Page", "cursor": cursor, "items": items.map { $0.snapshot }, "totalCount": totalCount])
       }
 
       public var __typename: String {
@@ -158,60 +163,119 @@ public final class GetAllEventsQuery: GraphQLQuery {
         }
       }
 
-      public var id: String {
+      public var cursor: String? {
         get {
-          return snapshot["id"]! as! String
+          return snapshot["cursor"] as? String
         }
         set {
-          snapshot.updateValue(newValue, forKey: "id")
+          snapshot.updateValue(newValue, forKey: "cursor")
         }
       }
 
-      public var name: String {
+      public var items: [Item] {
         get {
-          return snapshot["name"]! as! String
+          return (snapshot["items"] as! [Snapshot]).map { Item(snapshot: $0) }
         }
         set {
-          snapshot.updateValue(newValue, forKey: "name")
+          snapshot.updateValue(newValue.map { $0.snapshot }, forKey: "items")
         }
       }
 
-      public var date: String {
+      public var totalCount: Int {
         get {
-          return snapshot["date"]! as! String
+          return snapshot["totalCount"]! as! Int
         }
         set {
-          snapshot.updateValue(newValue, forKey: "date")
+          snapshot.updateValue(newValue, forKey: "totalCount")
         }
       }
 
-      public var type: HistoricalEventType {
-        get {
-          return snapshot["type"]! as! HistoricalEventType
-        }
-        set {
-          snapshot.updateValue(newValue, forKey: "type")
-        }
-      }
+      public struct Item: GraphQLSelectionSet {
+        public static let possibleTypes = ["HistoricalEvent"]
 
-      public var fragments: Fragments {
-        get {
-          return Fragments(snapshot: snapshot)
-        }
-        set {
-          snapshot += newValue.snapshot
-        }
-      }
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("date", type: .nonNull(.scalar(String.self))),
+          GraphQLField("type", type: .nonNull(.scalar(HistoricalEventType.self))),
+        ]
 
-      public struct Fragments {
         public var snapshot: Snapshot
 
-        public var briefHistoricalEvent: BriefHistoricalEvent {
+        public init(snapshot: Snapshot) {
+          self.snapshot = snapshot
+        }
+
+        public init(id: String, name: String, date: String, type: HistoricalEventType) {
+          self.init(snapshot: ["__typename": "HistoricalEvent", "id": id, "name": name, "date": date, "type": type])
+        }
+
+        public var __typename: String {
           get {
-            return BriefHistoricalEvent(snapshot: snapshot)
+            return snapshot["__typename"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var id: String {
+          get {
+            return snapshot["id"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "id")
+          }
+        }
+
+        public var name: String {
+          get {
+            return snapshot["name"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        public var date: String {
+          get {
+            return snapshot["date"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "date")
+          }
+        }
+
+        public var type: HistoricalEventType {
+          get {
+            return snapshot["type"]! as! HistoricalEventType
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "type")
+          }
+        }
+
+        public var fragments: Fragments {
+          get {
+            return Fragments(snapshot: snapshot)
           }
           set {
             snapshot += newValue.snapshot
+          }
+        }
+
+        public struct Fragments {
+          public var snapshot: Snapshot
+
+          public var briefHistoricalEvent: BriefHistoricalEvent {
+            get {
+              return BriefHistoricalEvent(snapshot: snapshot)
+            }
+            set {
+              snapshot += newValue.snapshot
+            }
           }
         }
       }

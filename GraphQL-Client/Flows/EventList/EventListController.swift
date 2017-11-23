@@ -8,6 +8,8 @@
 
 import UIKit
 import CHTCollectionViewWaterfallLayout
+import Apollo
+import SwiftMessages
 
 class EventListController: UIViewController {
 
@@ -15,6 +17,10 @@ class EventListController: UIViewController {
   @IBOutlet fileprivate weak var collectionView: UICollectionView!
 
   fileprivate var briefEvents: [BriefHistoricalEvent] = []
+  fileprivate var cursor: String?
+  fileprivate var fetchRequest: Cancellable?
+  fileprivate let pageSize = 10
+  fileprivate var isLoadingMoreData = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -60,6 +66,17 @@ extension EventListController: UICollectionViewDataSource {
     return cell
   }
 
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    let currentIndex = indexPath.item
+    let pageCount = currentIndex / pageSize
+    let indexOnLastPage = currentIndex - pageCount * pageSize
+    let pageLeft = pageSize - indexOnLastPage
+
+    if cursor != nil && currentIndex > 0 && pageLeft < 3 && !isLoadingMoreData {
+      loadMoreData()
+    }
+  }
+
 }
 
 extension EventListController: CHTCollectionViewDelegateWaterfallLayout {
@@ -94,18 +111,47 @@ private extension EventListController {
 
   func updateEventList() {
     loadData { (events) in
+      guard !events.isEmpty else {
+        return
+      }
       self.briefEvents = events
       self.collectionView.reloadData()
     }
   }
 
-  func loadData(completion: @escaping ([BriefHistoricalEvent]) -> Void) {
-    apollo.fetch(query: GetAllEventsQuery(), cachePolicy: .returnCacheDataAndFetch) { (result, error) in
+  func loadMoreData() {
+    isLoadingMoreData = true
+    loadData(cursor: cursor) { (events) in
+      defer {
+        self.isLoadingMoreData = false
+      }
+      guard !events.isEmpty else {
+        return
+      }
+
+      self.briefEvents.append(contentsOf: events)
+      self.collectionView.reloadData()
+    }
+  }
+
+  func loadData(cursor: String? = nil, completion: @escaping ([BriefHistoricalEvent]) -> Void) {
+    fetchRequest?.cancel()
+    fetchRequest = apollo.fetch(query: GetEventsQuery(cursor: cursor), cachePolicy: .returnCacheDataAndFetch) { (result, error) in
       guard let result = result else {
         print(error ?? "unknown error")
         return
       }
-      let events = result.data!.allEvents.map { BriefHistoricalEvent(snapshot: $0.snapshot) }
+      guard let data = result.data else {
+        let errorMessage = result.errors?.first?.localizedDescription ?? "Internal server error"
+        let errorView = MessageViewBuilder.makeError(with: errorMessage)
+        SwiftMessages.show(view: errorView)
+        return
+      }
+      let events = data.allEvents.items.map { BriefHistoricalEvent(snapshot: $0.snapshot) }
+      if let cursor = data.allEvents.cursor {
+        self.cursor = cursor
+      }
+
       completion(events)
     }
   }

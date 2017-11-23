@@ -182,7 +182,7 @@ private extension HistoricalEventDetailsController {
     guard let name = draftEvent.graphQLMap["name"] as? String, !name.isEmpty else {
       return ValidationError.name
     }
-    guard draftEvent.graphQLMap["date"] != nil else {
+    if draftEvent.date.isEmpty {
       return ValidationError.date
     }
 
